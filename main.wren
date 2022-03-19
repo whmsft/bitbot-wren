@@ -165,9 +165,14 @@ class main {
     Canvas.print("Enemy: "+_ENEMY_HEALTH_.toString, 1, 1, Color.white)
     // Canvas.pset(_x, _y, Color.blue)
     // if (_ticks >= 60 * 1) {}
-    if (_ticks >= 60 * 0.3) {
-      _bullets.add(Bullet.new(Player))
-      _ticks = 0
+    if (_ticks >= 60 * 0.001) {
+      if (_ticks >= 60* 0.3) {
+        _bullets.add(Bullet.new(Player))
+        _ticks = 0
+      }
+      if (_bullets.count > 0 && _bullets[0].y < 0) {
+        _bullets.removeAt(0)
+      }
     }
     _bullets.each {|bullet|
       bullet.draw()
