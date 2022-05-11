@@ -87,7 +87,6 @@ class Bullet {
   width {5}
   height {5}
   player {_player}
-  enemy {_enemy}
   tick {_tick}
   tick = (value) {_tick = value}
   x = (value) {_x = value}
@@ -108,6 +107,37 @@ class Bullet {
     }
     //Canvas.pset(x, y, Color.yellow)
     Canvas.rectfill(x-2.5, y-2.5 , 5, 5, Color.yellow)
+  }
+}
+
+class EnemyBullet {
+  xlst {_xlst}
+  ylst {_ylst}
+  width {5}
+  height {5}
+  enemy {_enemy}
+  tick {_tick}
+  tick = (value) {_tick = value}
+  xlst = (value) {_xlst = value}
+  ylst = (value) {_ylst = value}
+  construct new(en) {
+    _enemy = en
+    _xlst = [enemy.x, enemy.x, enemy.x]
+    _ylst = [enemy.y, enemy.y, enemy.y]
+    _tick = 0
+  }
+  update() {
+    _tick = tick +1
+  }
+  draw() {
+    if (tick >= 60 * 0.01) {
+      tick = 0
+      _xlst = [xlst[0], xlst[1]+1, xlst[2]-1]
+      _ylst = [ylst[0]+2, ylst[1]+2, ylst[2]+2]
+    }
+    Canvas.rectfill(xlst[0], ylst[0] , 5, 5, Color.red)
+    Canvas.rectfill(xlst[1], ylst[1] , 5, 5, Color.red)
+    Canvas.rectfill(xlst[2], ylst[2] , 5, 5, Color.red)
   }
 }
 
